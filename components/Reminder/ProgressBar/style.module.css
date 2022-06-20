@@ -1,0 +1,9 @@
+.container {
+    background-color: black;
+    width: 80%;
+}
+
+.progress {
+    padding-left: 1rem;
+    color: aliceblue;
+}
