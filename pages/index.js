@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
         <main>
-            <h1>Welcome to Reminder</h1>
+            <h1>Welcome to Reminder test</h1>
             <h3>Current Time: {time}</h3>
             <Reminder currentTime={timer.currentTime()}/>
         </main>
