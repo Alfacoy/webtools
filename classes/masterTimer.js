@@ -5,12 +5,16 @@ export default class MasterTimer {
 
     }
 
-    now = () =>{
-        return `${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}`;
+    display = () =>{
+        const time = DateTime.now();
+        const hour = time.hour < 10 ? `0${time.hour}` : time.hour;
+        const minute = time.minute < 10 ? `0${time.minute}` : time.minute;
+        const second = time.second < 10 ? `0${time.second}` : time.second;
+
+        return `${hour}:${minute}:${second}`;
     }
 
-    diff = (end) => {
-        const endTime = DateTime.fromISO(end);
-        return endTime.toSeconds() - DateTime.now().toSeconds();
+    currentTime = () => {
+        return DateTime.now();
     }
 }

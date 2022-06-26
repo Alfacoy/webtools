@@ -1,14 +1,18 @@
 import {useState,useEffect} from "react";
 import style from './style.module.css';
 
-const ProgressBar =({reminder})=> {
+const ProgressBar =({reminder, currentTime, isDone})=> {
     const [value, setValue] = useState(0);
     const [isActive, setIsActive] = useState(false);
 
     useEffect(()=>{
-        const lowerThan = Math.round(((reminder.interval() - reminder.whenIFinish()) / reminder.interval()) * 100);
+        // ((Vi-Vc)/Vi)*100
+        const lowerThan = Math.round(((reminder.duration() - reminder.countDown(currentTime)) / reminder.duration()) * 100);
         lowerThan <= 100 ? setValue(lowerThan) : setValue(100);
-        if(value === 100) return setIsActive(true);
+        if(value === 100) {
+            setIsActive(true)
+            isDone('Complete')
+        };
     });
 
     useEffect(()=>{

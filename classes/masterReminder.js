@@ -1,4 +1,4 @@
-import {DateTime,Interval} from 'luxon';
+import {DateTime, Duration, Interval} from 'luxon';
 const statusList = ['En Curso', 'Pausado', 'Finalizado'];
 
 export default class MasterReminder {
@@ -14,17 +14,24 @@ export default class MasterReminder {
         console.log(`
             Title: ${this.title}.
             Status: ${this.status}.
-            CurrentTime: ${this.currentTime}.
+            CreationDate: ${this.creationDate}.
             EndTime: ${this.endTime}.
         `)
     }
 
-    whenIFinish = () => {
-        return this.endTime.toSeconds() - DateTime.now().toSeconds();
+    countDown = (currentTime) => {
+        const interval = Interval.fromDateTimes(currentTime,this.endTime);
+        const data = interval.count('seconds') - 1
+        if(!isNaN(data)) {
+            return data
+        } else{
+            return 0
+        }
     }
 
-    interval = () => {
-        const data = Interval.fromDateTimes(this.creationDate,this.endTime);
-        return data.length() / 1000
+    duration = () => {
+        const interval = Interval.fromDateTimes(this.creationDate, this.endTime);
+        const data = interval.count('seconds') - 1
+        return data
     }
 }

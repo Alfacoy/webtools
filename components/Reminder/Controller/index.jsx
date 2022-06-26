@@ -1,3 +1,4 @@
+//**Styles**//
 import style from './style.module.css';
 
 const ReminderController = ({title,hour,minute,create}) => {
@@ -19,11 +20,15 @@ const ReminderController = ({title,hour,minute,create}) => {
 
     function handleSubmit (event) {
         event.preventDefault()
-        create()
-        const nodes = event.target.form.childNodes;
-        nodes.forEach(node => {
-            if(node.name) node.value = null;
-        })
+        const isDone = create()
+        if(isDone.status === 'Success'){
+            const nodes = event.target.form.childNodes;
+            nodes.forEach(node => {
+                if(node.name) node.value = null;
+            })
+        }else{
+            console.error(isDone.message)
+        }
     }
 
     return (
